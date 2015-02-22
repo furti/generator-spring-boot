@@ -1,0 +1,36 @@
+{
+  "name": "generator-spring-boot",
+  "version": "0.0.0",
+  "description": "Yeoman generator",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "furti/generator-spring-boot",
+  "author": {
+    "name": "Daniel Furtlehner",
+    "email": "",
+    "url": "https://github.com/furti"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "chalk": "^0.5.0",
+    "fs-extra": "^0.16.3",
+    "yeoman-generator": "^0.18.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  }
+}
