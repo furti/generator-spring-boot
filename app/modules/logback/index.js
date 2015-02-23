@@ -34,7 +34,12 @@ LogbackModule.prototype.write = function (generator) {
   }
 };
 
+LogbackModule.prototype.install = function (generator) {
+  //Nothing to do here
+};
+
 LogbackModule.prototype.end = function (generator) {
+  //Nothing to do here
 };
 
 module.exports = new LogbackModule();

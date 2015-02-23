@@ -10,30 +10,11 @@ MavenModule.prototype.init = function (generator) {
 };
 
 MavenModule.prototype.prompts = function (generator) {
-  return [{
-    type: 'input',
-    name: 'groupId',
-    message: 'The maven group id for this application',
-    validate: generator.notBlank
-  }, {
-    type: 'input',
-    name: 'artifactId',
-    message: 'The maven artifact id for this application',
-    validate: generator.notBlank
-  }, {
-    type: 'input',
-    name: 'version',
-    message: 'The maven version for this application',
-    default: '0.0.1-SNAPSHOT'
-  }];
+  return [];
 };
 
 MavenModule.prototype.answer = function (props, generator) {
-  generator.app = {
-    groupId: props.groupId,
-    artifactId: props.artifactId,
-    version: props.version
-  };
+
 };
 
 MavenModule.prototype.configure = function (generator) {
@@ -48,9 +29,14 @@ MavenModule.prototype.write = function (generator) {
       app: generator.app,
       springVersion: generator.springVersion,
       javaVersion: generator.javaVersion,
-      useLogback: generator.useLogback
+      useLogback: generator.useLogback,
+      startClass: generator.basePackage + '.' + generator.capitalize(generator.app.name) + 'Application'
     }
   );
+};
+
+MavenModule.prototype.install = function (generator) {
+  //Nothing to do here
 };
 
 MavenModule.prototype.end = function (generator) {

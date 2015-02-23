@@ -26,6 +26,11 @@ BaseModule.prototype.init = function (generator) {
     return this.destinationPath(path.join('src/test/resources', subPath));
   };
 
+  generator.capitalize = function (string) {
+    var capitalized = string.replace(/ /g, '');
+    return capitalized.charAt(0).toUpperCase() + capitalized.slice(1);
+  };
+
   generator.notBlank = function (value) {
     if (!value || value.trim().length === 0) {
       return 'Entered value must not be blank';
@@ -41,21 +46,46 @@ BaseModule.prototype.init = function (generator) {
 BaseModule.prototype.prompts = function (generator) {
   return [{
     type: 'input',
+    name: 'groupId',
+    message: 'The maven group id for this application',
+    validate: generator.notBlank
+  }, {
+    type: 'input',
+    name: 'artifactId',
+    message: 'The maven artifact id for this application',
+    validate: generator.notBlank
+  }, {
+    type: 'input',
+    name: 'version',
+    message: 'The maven version for this application',
+    default: '0.0.1-SNAPSHOT'
+  }, {
+    type: 'input',
+    name: 'name',
+    message: 'Name',
+    validate: generator.notBlank
+  }, {
+    type: 'input',
+    name: 'description',
+    message: 'Description',
+    validate: generator.notBlank
+  }, {
+    type: 'input',
     name: 'javaVersion',
     message: 'The Java version to use',
     choices: ['1.6', '1.7', '1.8'],
     default: '1.8'
   }, {
     type: 'input',
+    name: 'springVersion',
+    message: 'The spring boot version to use',
+    default: '1.2.1.RELEASE'
+  }, {
+    type: 'input',
     name: 'basePackage',
     message: 'The base package for your app',
     default: generator.basePackage,
     validate: generator.notBlank
-  }, {
-    type: 'input',
-    name: 'springVersion',
-    message: 'The spring boot version to use',
-    default: '1.2.1.RELEASE'
   }];
 };
 
@@ -63,6 +93,14 @@ BaseModule.prototype.answer = function (props, generator) {
   generator.springVersion = props.springVersion;
   generator.basePackage = props.basePackage;
   generator.javaVersion = props.javaVersion;
+
+  generator.app = {
+    groupId: props.groupId,
+    artifactId: props.artifactId,
+    version: props.version,
+    name: props.name,
+    description: props.description
+  };
 };
 
 BaseModule.prototype.configure = function (generator) {
@@ -87,6 +125,10 @@ BaseModule.prototype.write = function (generator) {
   fs.mkdirsSync(mainResource);
   fs.mkdirsSync(testPackage);
   fs.mkdirsSync(testResource);
+};
+
+BaseModule.prototype.install = function (generator) {
+  //Nothing to do here
 };
 
 BaseModule.prototype.end = function (generator) {

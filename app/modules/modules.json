@@ -2,5 +2,7 @@
   "base",
   "maven",
   "logback",
-  "app"
+  "app",
+  "properties",
+  "jackson"
 ]

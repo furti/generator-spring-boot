@@ -58,9 +58,13 @@ module.exports = yeoman.generators.Base.extend({
     });
   },
   install: function () {
-    /*this.installDependencies({
-     skipInstall: this.options['skip-install']
-     });*/
+    var generator = this;
+
+    this.modules.forEach(function (module) {
+      module.install(generator);
+    });
+
+    //this.spawnCommand('git', ['init']);
   },
   end: function () {
     var generator = this;

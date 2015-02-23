@@ -22,11 +22,30 @@ AppModule.prototype.configure = function (generator) {
 };
 
 AppModule.prototype.write = function (generator) {
+  var className = generator.capitalize(generator.app.name);
+
   generator.fs.copyTpl(
     generator.templatePath('classes/Application.java'),
-    generator.mainPackagePath('Application.java'),
-    {basePackage: generator.basePackage}
+    generator.mainPackagePath(className + 'Application.java'),
+    {
+      basePackage: generator.basePackage,
+      appClass: className
+    }
   );
+
+  generator.fs.copyTpl(
+    generator.templatePath('classes/AppConfig.java'),
+    generator.mainPackagePath(className + 'Config.java'),
+    {
+      basePackage: generator.basePackage,
+      appClass: className,
+      registerJacksonDateModule: generator.javaVersion === '1.8'
+    }
+  );
+};
+
+AppModule.prototype.install = function (generator) {
+  //Nothing to do here
 };
 
 AppModule.prototype.end = function (generator) {

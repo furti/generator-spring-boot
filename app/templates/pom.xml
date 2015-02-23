@@ -7,6 +7,9 @@
   <artifactId>${ app.artifactId }</artifactId>
   <version>${ app.version }</version>
 
+  <name>${ app.name }</name>
+  <description>${ app.description }</description>
+
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -14,6 +17,7 @@
   </parent>
 
   <properties>
+    <start-class>${ startClass }</start-class>
     <java.version>${ javaVersion }</java.version>
   </properties>
 
