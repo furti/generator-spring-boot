@@ -10,11 +10,19 @@ AppModule.prototype.init = function (generator) {
 };
 
 AppModule.prototype.prompts = function (generator) {
-  return [];
+  return [{
+    type: 'confirm',
+    name: 'enableISODate',
+    message: 'Enable ISO date handling',
+    when: function (answers) {
+      return answers.javaVersion !== '1.6' && answers.javaVersion !== '1.7';
+    },
+    default: true
+  }];
 };
 
 AppModule.prototype.answer = function (props, generator) {
-  //Nothing to do here
+  generator.enableISODate = props.enableISODate;
 };
 
 AppModule.prototype.configure = function (generator) {
@@ -22,8 +30,7 @@ AppModule.prototype.configure = function (generator) {
 };
 
 AppModule.prototype.write = function (generator) {
-  //Dateserializer is based on LocalDate so we need at least java 1.8
-  if (generator.javaVersion === '1.6' || generator.javaVersion === '1.7') {
+  if (!generator.enableISODate) {
     return;
   }
 

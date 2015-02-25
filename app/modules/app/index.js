@@ -39,7 +39,7 @@ AppModule.prototype.write = function (generator) {
     {
       basePackage: generator.basePackage,
       appClass: className,
-      registerJacksonDateModule: generator.javaVersion === '1.8'
+      registerJacksonDateModule: generator.enableISODate
     }
   );
 };
