@@ -4,5 +4,7 @@
   "logback",
   "app",
   "properties",
-  "jackson"
+  "jackson",
+  "thymeleaf",
+  "indexHtml"
 ]

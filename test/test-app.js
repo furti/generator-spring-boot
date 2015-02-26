@@ -56,7 +56,9 @@ describe('spring-boot:app', function () {
         'src/main/java/at/test/boot/util/LocalDateDeserializer.java',
         'src/main/java/at/test/boot/util/LocalDateTimeDeserializer.java',
         'src/main/resources/logback.xml',
-        'src/main/resources/config/application.properties'
+        'src/main/resources/config/application.properties',
+        'src/main/resources/templates/index.html',
+        'src/main/java/at/test/boot/TemplateController.java'
       ]);
     });
 
@@ -112,6 +114,21 @@ describe('spring-boot:app', function () {
       var file = 'src/main/resources/config/application.properties';
       assert.fileContent([
         [file, escapeRegExp('server.port=8080')]
+      ]);
+    });
+
+    it('index.html', function () {
+      var file = 'src/main/resources/templates/index.html';
+      assert.fileContent([
+        [file, xmlTagRegex('title', 'boottest')],
+        [file, xmlTagRegex('h1', 'Hello, boottest!')]
+      ]);
+    });
+
+    it('TemplateController.java', function () {
+      var file = 'src/main/java/at/test/boot/TemplateController.java';
+      assert.fileContent([
+        [file, escapeRegExp('package at.test.boot;')]
       ]);
     });
   });
